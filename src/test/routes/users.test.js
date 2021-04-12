@@ -9,9 +9,13 @@ let context;
 beforeAll(async () => {
   context = await Context.build();
 });
-afterAll(async () => {
-    return await context.close();
-  });
+afterAll(() => {
+  return context.close();
+});
+
+beforeEach(() => {
+    await context.reset();
+})
 
 it("create a user", async () => {
   const startingCount = await UserRepo.count();
@@ -24,5 +28,3 @@ it("create a user", async () => {
   const finishCount = await UserRepo.count();
   expect(finishCount - startingCount).toEqual(1);
 });
-
-

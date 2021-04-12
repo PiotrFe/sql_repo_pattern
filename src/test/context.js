@@ -69,6 +69,10 @@ class Context {
     this.roleName = roleName;
   }
 
+  async reset() {
+      return pool.query("DELETE FROM users;");
+  }
+
   async close() {
     await pool.close();
     await pool.connect(DEFAULT_OPTIONS);
